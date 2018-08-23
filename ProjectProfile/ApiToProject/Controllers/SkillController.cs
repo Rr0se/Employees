@@ -27,17 +27,7 @@ namespace ApiToProject.Controllers
             context.Skills.Add(new Skill()
             {
                 SkillName = inputSkillModel.Name,
-                ExperienceInYears = inputSkillModel.Experience,
-                Profficiency = inputSkillModel.Profficiency
-                
             });
-
-            //context.EmployeeSkills.Add(new EmployeeSkill()
-            //{
-            //    ExperienceInYears = inputSkillModel.Experience,
-            //    Profficiency = inputSkillModel.Profficiency
-            //});
-
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);
         }
@@ -50,9 +40,20 @@ namespace ApiToProject.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.BadRequest);
 
             var skill = context.Skills.FirstOrDefault(x => x.Id == id);
-            //var employeeskill = context.EmployeeSkills.FirstOrDefault(x => x.Id == id);
 
-            if (skill == null /*|| employeeskill==null*/)
+            if (skill == null)
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+            return StatusCode((int)HttpStatusCode.OK, skill);
+        }
+
+        [HttpGet]
+        [Route("GetSkills")]
+        public IActionResult GetSkills()
+        {
+            var skill = context.Skills?.ToList();
+
+            if (skill == null || !skill.Any())
                 return new StatusCodeResult((int)HttpStatusCode.NotFound);
 
             return StatusCode((int)HttpStatusCode.OK, skill);
@@ -64,19 +65,12 @@ namespace ApiToProject.Controllers
         {
             if (inputSkillModel == null)
                 return new StatusCodeResult((int)HttpStatusCode.BadRequest);
-
             var skill = context.Skills.FirstOrDefault(x => x.Id == inputSkillModel.Id);
-            //var employeeskill = context.EmployeeSkills.FirstOrDefault(x => x.Id == inputSkillModel.Id);
 
-            if (skill == null /*|| employeeskill == null*/)
+            if (skill == null)
                 return new StatusCodeResult((int)HttpStatusCode.NotFound);
 
             skill.SkillName = inputSkillModel.Name;
-            skill.ExperienceInYears = inputSkillModel.Experience;
-            skill.Profficiency = inputSkillModel.Profficiency;
-            //employeeskill.ExperienceInYears = inputSkillModel.Experience;
-            //employeeskill.Profficiency = inputSkillModel.Profficiency;
-
             context.SaveChanges();
 
             return StatusCode((int)HttpStatusCode.OK);
@@ -88,9 +82,6 @@ namespace ApiToProject.Controllers
         {
             Skill skill = context.Skills.Find(Id);
             context.Skills.Remove(skill);
-
-            //EmployeeSkill employeeSkill = context.EmployeeSkills.Find(Id);
-            //context.EmployeeSkills.Remove(employeeSkill);
 
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);

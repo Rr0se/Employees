@@ -70,7 +70,7 @@ export default {
     //       yearsOfWork:this.employees.yearsOfWork
     //     }
 
-    //     this.$http.post('http://localhost:56070/api/employees/AddEmployee', newEmployee)
+    //     this.$http.post('http://localhost:4444/api/employees/AddEmployee', newEmployee)
     //     .then(function(response){
     //       this.$router.push({path: '/addemployee', query: {alert: 'Customer Added'}});
     //     })

@@ -11,9 +11,10 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180822082740_skillFix")]
+    partial class skillFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +74,6 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("EmployeeId");
-
-                    b.Property<DateTime>("JoinDate");
 
                     b.Property<Guid>("ProjectId");
 

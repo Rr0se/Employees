@@ -60,8 +60,8 @@ namespace ApiToProject.Controllers
                 {
                     Id = skill.Skill.Id,
                     Name = skill.Skill.SkillName,
-                    Experience = skill.Skill.ExperienceInYears,
-                    Profficiency = skill.Skill.Profficiency
+                   // Experience = skill.Skill.ExperienceInYears,
+                   // Profficiency = skill.Skill.Profficiency
                 });
             }
 
@@ -83,10 +83,10 @@ namespace ApiToProject.Controllers
                 {
                     Id=project.Project.Id,
                     Name=project.Project.Title,
-                    ClientSector=project.Project.ClientSector,
-                    Technologies=project.Project.Technologies,
-                    StartDate=project.Project.StartDate,
-                    EndDate=project.Project.EndDate
+                    //ClientSector=project.Project.ClientSector,
+                   //Technologies=project.Project.Technologies,
+                    ///StartDate=project.Project.StartDate,
+                    //EndDate=project.Project.EndDate
                 });
             }
             return output;
@@ -247,6 +247,80 @@ namespace ApiToProject.Controllers
             await context.SaveChangesAsync();
             return StatusCode((int) HttpStatusCode.OK);
         }
+
+        [HttpPost]
+        [Route("AddSkillToEmployee")]
+        public async Task<IActionResult> AddSkillToEmployee([FromBody] EmployeeSkillInputModel model)
+        {
+
+            var employee = context.Employees.Include(x => x.EmployeeSkills).FirstOrDefault(x => x.Id == model.EmployeeId);
+            if (employee == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var skil = context.Skills.Include(x => x.EmployeeSkills).FirstOrDefault(x => x.Id == model.SkillId);
+            if (skil == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            if (employee.EmployeeSkills == null)
+                employee.EmployeeSkills = new List<EmployeeSkill>();
+            if (skil.EmployeeSkills == null)
+                employee.EmployeeSkills = new List<EmployeeSkill>();
+
+            if (employee.EmployeeSkills.Any(x => x.SkillId == skil.Id))
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var employeeSkil = new EmployeeSkill
+            {
+                Employee = employee,
+                EmployeeId = model.EmployeeId,
+                Skill = skil,
+                ExperienceInYears = model.ExperienceInYears,
+                Profficiency = model.Profficiency
+            };
+
+            employee.EmployeeSkills.Add(employeeSkil);
+            skil.EmployeeSkills.Add(employeeSkil);
+            await context.SaveChangesAsync();
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("AddProjectToEmployee")]
+        public async Task<IActionResult> AddProjectToEmployee([FromBody] EmployeeProjectInputModel model)
+        {
+            var employee = context.Employees.Include(x => x.EmployeeProjects).FirstOrDefault(x => x.Id == model.EmployeeId);
+            if (employee == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var proj = context.Projects.Include(x => x.EmployeeProjects).FirstOrDefault(x => x.Id == model.ProjectId);
+            if (proj == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            if (employee.EmployeeProjects == null)
+                employee.EmployeeProjects = new List<EmployeeProject>();
+            if (proj.EmployeeProjects == null)
+                employee.EmployeeProjects = new List<EmployeeProject>();
+
+            if (employee.EmployeeProjects.Any(x => x.ProjectId == proj.Id))
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var employeeProj = new EmployeeProject
+            {
+                Employee = employee,
+                EmployeeId = model.EmployeeId,
+                JoinDate = DateTime.Now
+                // ClientSector = model.ClientSector,
+                //Technologies = model.Technologies,
+                //StartDate = model.StartDate,
+                //EndDate = model.EndDate
+            };
+
+            employee.EmployeeProjects.Add(employeeProj);
+            proj.EmployeeProjects.Add(employeeProj);
+            await context.SaveChangesAsync();
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
 
     }
 

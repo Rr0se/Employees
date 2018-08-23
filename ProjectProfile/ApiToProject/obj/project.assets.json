@@ -5965,7 +5965,7 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "Zj1pCSR7PJ+gnETE9BGEXEWQwKXovG6cMgudlsvAbXES8Qnbv/Ka1F0QiblAgRzEA+ituJkyeBVLk1odkoF4Og==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "files": [
@@ -6826,7 +6826,7 @@
       ]
     },
     "Microsoft.Extensions.PlatformAbstractions/1.1.0": {
-      "sha512": "UMlN++q5qqzQ2HH+uOrKxN5fmBXMQDhrYkSaPJxhmyzfJaFPirrVr1raim/Ocq1psAZoB9+7JSAf0GDAX35wUg==",
+      "sha512": "H6ZsQzxYw/6k2DfEQRXdC+vQ6obd6Uba3uGJrnJ2vG4PRXjQZ7seB13JdCfE72abp8E6Fk3gGgDzfJiLZi5ZpQ==",
       "type": "package",
       "path": "microsoft.extensions.platformabstractions/1.1.0",
       "files": [
@@ -12811,24 +12811,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pawel\\.nuget\\packages\\": {},
+    "C:\\Users\\it-solve\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pawel\\Desktop\\Project\\ProjectProfile\\ApiToProject\\ApiToProject.csproj",
+      "projectUniqueName": "C:\\Users\\it-solve\\Desktop\\Employees\\Employees\\ProjectProfile\\ApiToProject\\ApiToProject.csproj",
       "projectName": "ApiToProject",
-      "projectPath": "C:\\Users\\pawel\\Desktop\\Project\\ProjectProfile\\ApiToProject\\ApiToProject.csproj",
-      "packagesPath": "C:\\Users\\pawel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pawel\\Desktop\\Project\\ProjectProfile\\ApiToProject\\obj\\",
+      "projectPath": "C:\\Users\\it-solve\\Desktop\\Employees\\Employees\\ProjectProfile\\ApiToProject\\ApiToProject.csproj",
+      "packagesPath": "C:\\Users\\it-solve\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\it-solve\\Desktop\\Employees\\Employees\\ProjectProfile\\ApiToProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\pawel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\it-solve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

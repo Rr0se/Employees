@@ -3,8 +3,12 @@
     <h2>Karta Pracownika</h2>
     <br/><br/><br/>
     <div class="employee" style="float: left;">
-     <tr v-for="emp in employees" :key="emp.Id">
-        {{emp.name}}
+     <tr v-for="emp in profile" :key="emp.Id">
+        {{emp.firstName}}
+        {{emp.specialization}}
+        {{emp.rating}}
+        {{emp.overalTenure}}
+
         </tr>
     </div>
 </div>
@@ -14,35 +18,36 @@
 // https://alligator.io/vuejs/rest-api-axios/
 // Access-Control-Allow-Origin: *
 
-import axios from 'axios';
+import axios from "axios";
 
 export default {
- data() {
-   return {
-     employees: [],
-     errors: []
-   }
- },
+  data() {
+    return {
+      profile: [],
+      errors: []
+    };
+  },
 
- // Fetches posts when the component is created.
- created() {
-   axios.get(`http://localhost:56070/api/employees/GetEmployee?id=746916C8-001E-4364-6FC0-08D5FC3FB123`)
-   .then(response => {
-     console.log('asdaqwe')
-     // JSON responses are automatically parsed.
-       this.employees = response.data;
-     })
-     .catch(e => {
-       this.errors.push(e);
-     });
- },
+  // Fetches posts when the component is created.
+  created() {
+    axios
+      .get(`http://localhost:4444/api/employees/GetEmployee`)
+      .then(response => {
+        console.log("asdaqwe");
+        // JSON responses are automatically parsed.
+        this.employees = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  }
 };
-
 </script>
 
 
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

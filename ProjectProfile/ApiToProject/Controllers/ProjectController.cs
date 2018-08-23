@@ -32,10 +32,10 @@ namespace ApiToProject.Controllers
             {              
                 Id = project.Id,      
                 Name = project.Title ,
-                ClientSector = project.ClientSector,
-                Technologies = project.Technologies,
-                StartDate = project.StartDate,
-                EndDate = project.EndDate
+               // ClientSector = project.ClientSector,
+               // Technologies = project.Technologies,
+              //  StartDate = project.StartDate,
+              //  EndDate = project.EndDate
             };
             return output;
         }
@@ -104,10 +104,6 @@ namespace ApiToProject.Controllers
             context.Projects.Add(new Project()
             {
                 Title = inputProjectModel.Name,
-                ClientSector = inputProjectModel.ClientSector,
-                Technologies = inputProjectModel.Technologies,
-                StartDate = inputProjectModel.StartDate,
-                EndDate = inputProjectModel.EndDate,
             });
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);
@@ -125,10 +121,10 @@ namespace ApiToProject.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.NotFound);
 
             project.Title = inputProjectModel.Name;
-            project.ClientSector = inputProjectModel.ClientSector;
-            project.Technologies = inputProjectModel.Technologies;
-            project.StartDate = inputProjectModel.StartDate;
-            project.EndDate = inputProjectModel.EndDate;
+           // project.ClientSector = inputProjectModel.ClientSector;
+           // project.Technologies = inputProjectModel.Technologies;
+           // project.StartDate = inputProjectModel.StartDate;
+           // project.EndDate = inputProjectModel.EndDate;
 
             context.SaveChanges();
 
@@ -145,5 +141,43 @@ namespace ApiToProject.Controllers
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);
         }
+
+        [HttpPost]
+        [Route("AddEmployeeToProject")]
+        public async Task<IActionResult> AddEmployeeToProject([FromBody] ProjectEmployeeInputModel model)
+        {
+            var project = context.Projects.Include(x => x.EmployeeProjects).FirstOrDefault(x => x.Id == model.ProjectId);
+            if (project == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var emplo = context.Employees.Include(x => x.EmployeeProjects).FirstOrDefault(x => x.Id == model.EmployeeId);
+            if (emplo == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            if (project.EmployeeProjects == null)
+                project.EmployeeProjects = new List<EmployeeProject>();
+            if (emplo.EmployeeProjects == null)
+                emplo.EmployeeProjects = new List<EmployeeProject>();
+
+            if (project.EmployeeProjects.Any(x => x.EmployeeId == emplo.Id))
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var projectEmplo = new EmployeeProject
+            {
+                Project = project,
+                ProjectId = model.ProjectId,
+                Employee = emplo,
+                EmployeeId = model.EmployeeId,
+                JoinDate = DateTime.Now
+
+            };
+            emplo.EmployeeProjects.Add(projectEmplo);
+            project.EmployeeProjects.Add(projectEmplo);
+            await context.SaveChangesAsync();
+            return StatusCode((int)HttpStatusCode.OK);
+            
+        }
+
+
     }
 }

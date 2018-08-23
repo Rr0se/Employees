@@ -79,7 +79,7 @@ export default {
 
   // Fetches posts when the component is created.
   created() {
-    axios.get(`http://localhost:4444/api/projects/GetProjects`)
+    axios.get(`http://localhost:4444/api/projects/GetProject?Id=`)
     .then(response => {
       console.log('asdaqwe')
       // JSON responses are automatically parsed.
@@ -97,7 +97,7 @@ export default {
 
   //   methods:{
   //   getID(){
-  //       axios.get('http://localhost:56070/api/projects/GetProject?id=86904cf4-0a67-487c-3f3c-08d5fc3f39c7')
+  //       axios.get('http://localhost:4444/api/projects/GetProject?id=86904cf4-0a67-487c-3f3c-08d5fc3f39c7')
   //       .then(response =>{
   //         this.projects=response.data;
   //       })

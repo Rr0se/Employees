@@ -12,7 +12,7 @@ namespace ApiToProject.Entities
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         public DbSet<Employee> Employees { get; set; }

@@ -51,7 +51,7 @@ export default {
 
   // Fetches posts when the component is created.
   created() {
-    axios.get('http://localhost:56070/api/employees/GetEmployees')
+    axios.get('http://localhost:4444/api/employees/GetEmployees')
     .then(response => {
         this.employees = response.data;
       })
@@ -63,14 +63,14 @@ export default {
   methods: {
 
     deleteEmployee(){
-     axios.delete('http://localhost:56070/api/employees/Delete' , {
+     axios.delete('http://localhost:4444/api/employees/Delete' , {
        body:this.employees
      })
      .then(response=>{})
    },
 
     editEmployee(){
-     axios.get('http://localhost:56070/api/employees/GetEdit')
+     axios.get('http://localhost:4444/api/employees/GetEdit')
      .then(response => {
        this.employees=response.data;
      })

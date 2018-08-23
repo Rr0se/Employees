@@ -35,6 +35,30 @@
                id="EndDate" placeholder="Data zakończenia projektu">
             </div>
 
+            <div class="form-group">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Pracownik</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td>
+              <div class="text-left m-t-sm m-b-md">
+                <select v-model="selectedemployee" style="float:left;width: 160px">
+                  <option v-for="emp in employees" :key="emp.Id">
+                    {{ emp.profile.name }} {{ emp.profile.lastName }}
+                  </option>
+                </select>
+              </div>
+              
+                
+              
+            </td>
+          </tbody>
+        </table>
+      </div>
+
             <button type="submit" class="btn btn-primary btn-outline">Zapisz zmiany</button>
             <router-link to="/project"><button type="submit" class="btn btn-primary btn-outline">
               Wróć</button></router-link>
@@ -44,8 +68,38 @@
   </div>
 </template>
 
+<script>
+// https://alligator.io/vuejs/rest-api-axios/
+// Access-Control-Allow-Origin: *
+
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      employees: [],
+      errors: [],
+      selectedemployee: [],
+      alert: ""
+    };
+  },
+  // Fetches posts when the component is created.
+  created() {
+    axios
+      .get("http://localhost:4444/api/employees/GetEmployees")
+      .then(response => {
+        this.employees = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+  }
+};
+</script>
+
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
