@@ -2,7 +2,6 @@
   <div class="home">
     <bt/>
     <h1>{{ msg }}</h1>
-    <h2>Co chcesz zrobić?</h2>
        <router-link to="/employee"><button type="button" class="btn btn-primary btn-outline" style="width:250px;">
          Przejdź do bazy pracowników</button></router-link><br/><br/>
        <router-link to="/project"><button type="button" class="btn btn-primary btn-outline" style="width:250px;">
@@ -12,18 +11,19 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
-      msg: 'Witaj w aplikacji do zarządzania pracownikami!',
+      msg: "Witaj w aplikacji do zarządzania pracownikami!"
     };
-  },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

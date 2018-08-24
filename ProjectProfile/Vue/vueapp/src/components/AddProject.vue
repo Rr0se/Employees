@@ -1,8 +1,8 @@
 <template>
   <div class="addproject">
     <bt/>
-    <h1>Witaj w oknie dodawania projektu.</h1>
-    <h2>Proszę o wypełnienie formularza.</h2>
+    <h1></h1>
+    <h2></h2>
       <div class="col-lg-4"></div>
         <div class="col-lg-4">
           <form>
@@ -45,7 +45,8 @@
 </template>
 
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {

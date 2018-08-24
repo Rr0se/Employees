@@ -1,10 +1,10 @@
 <template>
   <div class="addproject">
     <bt/>
-    <h1>Witaj w oknie edycji projektu.</h1>
-    <h2>Proszę o wypełnienie formularza.</h2>
-      <div class="col-lg-4"></div>
-        <div class="col-lg-4">
+    <h1></h1>
+    <h2></h2>
+      <div class="col-lg-5"></div>
+        <div class="col-lg-2">
           <form>
             <div class="form-group">
               <label for="Title">Tytuł</label>
@@ -35,15 +35,12 @@
                id="EndDate" placeholder="Data zakończenia projektu">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" >
         <table class="table table-hover">
           <thead>
             <tr>
               <th>Pracownik</th>
-            </tr>
-          </thead>
-          <tbody>
-            <td>
+              <th>
               <div class="text-left m-t-sm m-b-md">
                 <select v-model="selectedemployee" style="float:left;width: 160px">
                   <option v-for="emp in employees" :key="emp.Id">
@@ -51,10 +48,11 @@
                   </option>
                 </select>
               </div>
-              
-                
-              
-            </td>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
           </tbody>
         </table>
       </div>
@@ -64,7 +62,7 @@
               Wróć</button></router-link>
           </form>
         </div>
-      <div class="col-lg-4"></div>
+      <div class="col-lg-5"></div>
   </div>
 </template>
 

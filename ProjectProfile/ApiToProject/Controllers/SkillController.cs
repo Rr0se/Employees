@@ -1,5 +1,6 @@
 ﻿using ApiToProject.Entities;
 using ApiToProject.InputModels;
+using ApiToProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace ApiToProject.Controllers
         {
             this.context = context;
         }
+        
 
         [HttpPost]
         [Route("AddSkill")]
@@ -51,14 +53,29 @@ namespace ApiToProject.Controllers
         [Route("GetSkills")]
         public IActionResult GetSkills()
         {
-            var skill = context.Skills?.ToList();
+            //var skill = context.Skills?.ToList();
 
-            if (skill == null || !skill.Any())
-                return new StatusCodeResult((int)HttpStatusCode.NotFound);
+           //if (skill == null || !skill.Any())
+               //return new StatusCodeResult((int)HttpStatusCode.NotFound);
 
-            return StatusCode((int)HttpStatusCode.OK, skill);
+            var tmp = context.Skills
+                 .ToList();
+
+            var output = new List<SkillViewModel>();
+
+            foreach (var skil in tmp)
+            {
+                output.Add(new SkillViewModel
+                {
+                    Id = skil.Id,
+                    SkillName = skil.SkillName
+                });
+            }
+
+            return StatusCode((int)HttpStatusCode.OK, output);
+
         }
-
+        
         [HttpPut]
         [Route("EditSkill")]
         public IActionResult EditSkill(InputSkillModel inputSkillModel)

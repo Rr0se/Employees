@@ -1,8 +1,8 @@
 <template>
   <div class="addemployee">
     <bt/>
-    <h1>Witaj w oknie edycji pracownika.</h1>
-    <h2>Proszę o wypełnienie formularza.</h2>
+    <h1></h1>
+    <h2></h2>
 
     <div class="col-lg-5"></div>
     <div class="col-lg-2">
