@@ -60,8 +60,10 @@ namespace ApiToProject.Controllers
                 {
                     Id = skill.Skill.Id,
                     Name = skill.Skill.SkillName,
-                   // Experience = skill.Skill.ExperienceInYears,
-                   // Profficiency = skill.Skill.Profficiency
+                    Group = skill.Skill.SkillGroup,
+
+                    // Experience = skill.Skill.ExperienceInYears,
+                    // Profficiency = skill.Skill.Profficiency
                 });
             }
 

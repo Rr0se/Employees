@@ -19,10 +19,12 @@ namespace ApiToProject.Entities
         public DbSet<Project> Projects { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<Technology> Technologies { get; set; }
 
         public DbSet<EmployeeProject> EmployeeProjects { get; set; }
         public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public DbSet<EmployeeLanguage> EmployeeLanguages { get; set; }
+        public DbSet<ProjectTechnology> ProjectTechnologies { get; set; }
 
 
 
@@ -81,6 +83,23 @@ namespace ApiToProject.Entities
                 .HasOne(x => x.Skill)
                 .WithMany(p => p.EmployeeSkills)
                 .HasForeignKey(pc => pc.SkillId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //------------------------------------------------------
+
+            modelBuilder.Entity<ProjectTechnology>()
+               .HasIndex(u => new { u.ProjectId, u.TechnologyId });
+
+            modelBuilder.Entity<ProjectTechnology>()
+                .HasOne(pe => pe.Project)
+                .WithMany(b => b.ProjectTechnology)
+                .HasForeignKey(pc => pc.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProjectTechnology>()
+                .HasOne(pe => pe.Technology)
+                .WithMany(b => b.ProjectTechnology)
+                .HasForeignKey(pc => pc.TechnologyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 

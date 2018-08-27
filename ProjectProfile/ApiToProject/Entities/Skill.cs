@@ -12,8 +12,11 @@ namespace ApiToProject.Entities
 
         [Required(ErrorMessage ="Uzupełnij pole")]
         public string SkillName { get; set; }
+        public SkillGroup SkillGroup { get; set; }
 
 
         public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
     }
+
+    public enum SkillGroup { Frontend, Backend, Admin, DB, Mobile }
 }

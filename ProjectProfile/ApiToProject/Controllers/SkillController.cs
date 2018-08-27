@@ -68,7 +68,8 @@ namespace ApiToProject.Controllers
                 output.Add(new SkillViewModel
                 {
                     Id = skil.Id,
-                    SkillName = skil.SkillName
+                    SkillName = skil.SkillName,
+                    SkillGroup = skil.SkillGroup
                 });
             }
 

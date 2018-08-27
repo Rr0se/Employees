@@ -26,9 +26,9 @@ namespace ApiToProject.Entities
 
                     var projects = new List<Project>()
                 {
-                    new Project(){Title="Linora-Application for managing animal transport" },//,ClientSector="Transport animal",Technologies=".Net/C#, MVC 5, MS SQL",StartDate=new DateTime(2017,11,21),EndDate=new DateTime(2017,12,14)},
-                    new Project(){Title="Be-there- Appliacation for managing events and ticket brokering" },//,ClientSector="Services",Technologies=".Net/C#, ASP.NET Core, AngularJS 2,TypeScript,Web API",StartDate=new DateTime(2018,01,10),EndDate=new DateTime(2018,02,04)},
-                    new Project(){Title="Ecologistics" }//,ClientSector="Spedition",Technologies=".Net/C#, MS SQL, MVC 5",StartDate=new DateTime(2018,02,10),EndDate=new DateTime(2018,03,15)}
+                    new Project(){Title="Linora-Application for managing animal transport" , ClientSector="Transport animal", Technologies=".Net/C#, MVC 5, MS SQL", StartDate=new DateTime(2017,11,21), EndDate=new DateTime(2017,12,14)},
+                    new Project(){Title="Be-there- Appliacation for managing events and ticket brokering" , ClientSector="Services", Technologies=".Net/C#, ASP.NET Core, AngularJS 2,TypeScript,Web API", StartDate=new DateTime(2018,01,10), EndDate=new DateTime(2018,02,04)},
+                    new Project(){Title="Ecologistics" , ClientSector="Spedition", Technologies=".Net/C#, MS SQL, MVC 5", StartDate=new DateTime(2018,02,10), EndDate=new DateTime(2018,03,15)}
                 };
 
                 var languages = new List<Language>()
@@ -43,12 +43,48 @@ namespace ApiToProject.Entities
 
                  var skills = new List<Skill>()
                 {
-                    new Skill() {SkillName="Windows Forms"},
-                    new Skill() {SkillName="C#"},
-                    new Skill() {SkillName="UML"},
-                    new Skill() {SkillName="Entity Framework"},
-                    new Skill() {SkillName="ASP.Net"},
-                    new Skill() {SkillName="Javascript/Jquery"}
+                    new Skill() {SkillName="Windows Forms", SkillGroup=SkillGroup.Frontend}, 
+                    new Skill() {SkillName="C#", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName="UML", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName="Entity Framework", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName="ASP.Net", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName="ASP.Net MVC 2/3/4/5", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName=".Net Framework 2/3/4/5", SkillGroup=SkillGroup.Backend},
+                    new Skill() {SkillName="JS/Jquery", SkillGroup=SkillGroup.Frontend},
+                    new Skill() {SkillName="T-SQL", SkillGroup=SkillGroup.DB},
+                    new Skill() {SkillName="MS SQL 2008/2012/2015", SkillGroup=SkillGroup.DB},
+                    new Skill() {SkillName="Mongo DB", SkillGroup=SkillGroup.DB},
+                    new Skill() {SkillName="PostgreSQL", SkillGroup=SkillGroup.DB},
+                    new Skill() {SkillName="HTML/CSS/Bootstrap", SkillGroup=SkillGroup.Frontend},
+                    new Skill() {SkillName="Kendo UI", SkillGroup=SkillGroup.Frontend},
+                    new Skill() {SkillName="AJAX", SkillGroup=SkillGroup.Frontend},
+                    new Skill() {SkillName="Linux", SkillGroup=SkillGroup.Admin},
+                    new Skill() {SkillName="OpenStreet Maps", SkillGroup=SkillGroup.Frontend},
+                    new Skill() {SkillName="Windows Phone", SkillGroup=SkillGroup.Mobile},
+
+                };
+                    var technologies = new List<Technology>()
+                {
+                    new Technology() {TechnologyName="Windows Forms"},
+                    new Technology() {TechnologyName="C#"},
+                    new Technology() {TechnologyName="UML"},
+                    new Technology() {TechnologyName="Entity Framework"},
+                    new Technology() {TechnologyName="ASP.Net"},
+                    new Technology() {TechnologyName="ASP.Net MVC 2/3/4/5"},
+                    new Technology() {TechnologyName=".Net Framework 2/3/4/5"},
+                    new Technology() {TechnologyName="JS/Jquery"},
+                    new Technology() {TechnologyName="T-SQL"},
+                    new Technology() {TechnologyName="MS SQL 2008/2012/2015"},
+                    new Technology() {TechnologyName="Mongo DB"},
+                    new Technology() {TechnologyName="PostgreSQL"},
+                    new Technology() {TechnologyName="HTML/CSS/Bootstrap"},
+                    new Technology() {TechnologyName="Kendo UI"},
+                    new Technology() {TechnologyName="AJAX"},
+                    new Technology() {TechnologyName="Linux"},
+                    new Technology() {TechnologyName="OpenStreet Maps"},
+                    new Technology() {TechnologyName="Windows Phone"},
+                    new Technology() {TechnologyName="Entity Framework Code First" }
+
                 };
 
 
@@ -56,7 +92,8 @@ namespace ApiToProject.Entities
                 context.Projects.AddRange(projects);
                 context.Languages.AddRange(languages);
                 context.Skills.AddRange(skills);
-                context.SaveChanges();
+                context.Technologies.AddRange(technologies);
+                    context.SaveChanges();
 
                  var employeeproject = new List<EmployeeProject>() {
                  new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[0].Id},
@@ -74,9 +111,17 @@ namespace ApiToProject.Entities
                  new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=languages[0].Id},
                  new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=languages[1].Id}
                 };
+
+                var projecttechnology = new List<ProjectTechnology>()
+                {
+                 new ProjectTechnology { ProjectId=projects[0].Id,TechnologyId=technologies[0].Id},
+                 new ProjectTechnology { ProjectId=projects[0].Id,TechnologyId=technologies[1].Id}
+                };
                     context.EmployeeProjects.AddRange(employeeproject);
                     context.EmployeeSkills.AddRange(employeeskill);
                     context.EmployeeLanguages.AddRange(employeelanguage);
+                    context.ProjectTechnologies.AddRange(projecttechnology);
+
                     context.SaveChanges();
                 }
                 catch (Exception ex)

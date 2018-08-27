@@ -22,7 +22,8 @@ namespace ApiToProject.Entities
 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
 
+        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
+        public ICollection<ProjectTechnology> ProjectTechnology { get; set; }
     }
 }

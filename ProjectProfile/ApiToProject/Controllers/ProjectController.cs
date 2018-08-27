@@ -32,10 +32,10 @@ namespace ApiToProject.Controllers
             {              
                 Id = project.Id,      
                 Name = project.Title ,
-               // ClientSector = project.ClientSector,
-               // Technologies = project.Technologies,
-              //  StartDate = project.StartDate,
-              //  EndDate = project.EndDate
+                ClientSector = project.ClientSector,
+                Technologies = project.Technologies,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate
             };
             return output;
         }
@@ -88,6 +88,12 @@ namespace ApiToProject.Controllers
             {
                 output.Add(new ProjectViewModel
                 {
+                    Id = proj.Id,
+                    Name = proj.Title,
+                    ClientSector = proj.ClientSector,
+                    Technologies = proj.Technologies,
+                    StartDate = proj.StartDate,
+                    EndDate = proj.EndDate,
                     ProfileProject = GenerateProject(proj.Id),
                     Profiles = GenerateProfile(proj.Id)
                 });
@@ -121,10 +127,10 @@ namespace ApiToProject.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.NotFound);
 
             project.Title = inputProjectModel.Name;
-           // project.ClientSector = inputProjectModel.ClientSector;
-           // project.Technologies = inputProjectModel.Technologies;
-           // project.StartDate = inputProjectModel.StartDate;
-           // project.EndDate = inputProjectModel.EndDate;
+            project.ClientSector = inputProjectModel.ClientSector;
+            project.Technologies = inputProjectModel.Technologies;
+            project.StartDate = inputProjectModel.StartDate;
+            project.EndDate = inputProjectModel.EndDate;
 
             context.SaveChanges();
 

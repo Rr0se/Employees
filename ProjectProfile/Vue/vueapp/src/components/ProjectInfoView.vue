@@ -10,14 +10,12 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Imie</th>
             <th>Nazwisko</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="emp in employees" :key="emp.Id">
-            <td align="left">{{emp.profile.id}}</td>
             <td align="left">{{emp.profile.name}}</td>
             <td align="left">{{emp.profile.lastName}}</td>
           </tr>
@@ -39,7 +37,6 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Projekt</th>
             <th>Sektor</th>
             <th>Technologie</th>
@@ -50,7 +47,6 @@
         <tbody>
           <tr>
             <tr v-for="p in projects" :key="p.Id">
-              <td align="left">{{p.profileProject.id}}</td>
               <td align="left">{{p.profileProject.name}}</td>
               <td align="left">{{p.profileProject.clientSector}}</td>
               <td align="left">{{p.profileProject.technologies}}</td>

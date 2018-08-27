@@ -11,9 +11,10 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180827105709_dbfix")]
+    partial class dbfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,26 +146,6 @@ namespace ApiToProject.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("ApiToProject.Entities.ProjectTechnology", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("ProjectId");
-
-                    b.Property<string>("TechnologiesName");
-
-                    b.Property<Guid>("TechnologyId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TechnologyId");
-
-                    b.HasIndex("ProjectId", "TechnologyId");
-
-                    b.ToTable("ProjectTechnologies");
-                });
-
             modelBuilder.Entity("ApiToProject.Entities.Skill", b =>
                 {
                     b.Property<Guid>("Id")
@@ -178,18 +159,6 @@ namespace ApiToProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skills");
-                });
-
-            modelBuilder.Entity("ApiToProject.Entities.Technology", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("TechnologyName");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Technologies");
                 });
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeLanguage", b =>
@@ -228,19 +197,6 @@ namespace ApiToProject.Migrations
                     b.HasOne("ApiToProject.Entities.Skill", "Skill")
                         .WithMany("EmployeeSkills")
                         .HasForeignKey("SkillId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ApiToProject.Entities.ProjectTechnology", b =>
-                {
-                    b.HasOne("ApiToProject.Entities.Project", "Project")
-                        .WithMany("ProjectTechnology")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ApiToProject.Entities.Technology", "Technology")
-                        .WithMany("ProjectTechnology")
-                        .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

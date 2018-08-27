@@ -32,7 +32,23 @@
       </div>
       <div class="col-lg-5"></div>
 
-
+<div class="form-group">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Projekt</th>
+              <th>
+                <div class="text-left m-t-sm m-b-md">
+                  <select v-model="selectedsproject" style="float:left;width: 160px">
+                    <option v-for="proj in projects" :key="proj.Id">
+                      {{ proj.name }}
+                    </option>
+                  </select>
+                </div>
+              </th>
+            </tr>
+          </thead>
+        </table>
 
       <div class="form-group">
         <table class="table table-hover">
@@ -130,6 +146,7 @@
       </div>
 
 
+
       <table class="table table-hover">
         <thead>
           <tr>
@@ -172,6 +189,7 @@
           Wróć</button>
       </router-link>
 
+</div>
     </div>
   </div>
 </template>
@@ -188,6 +206,7 @@ export default {
     return {
       languages: [],
       skills: [],
+      projects: [],
       errors: [],
       pickedspeak: "",
       pickedwrite: "",
@@ -195,6 +214,7 @@ export default {
       pickedprof: "",
       selectedskill: [],
       selectedlanguage: [],
+      selectedproject: [],
       alert: ""
     };
   },
@@ -213,6 +233,14 @@ export default {
       .get("http://localhost:4444/api/skills/GetSkills")
       .then(response => {
         this.skills = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+    axios
+      .get("http://localhost:4444/api/projects/GetProjects")
+      .then(response => {
+        this.projects = response.data;
       })
       .catch(e => {
         this.errors.push(e);
