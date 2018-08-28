@@ -74,7 +74,7 @@ namespace ApiToProject
                     .ForMember(dest => dest.Name, opt => opt.MapFrom(src =>
                        $"{src.FirstName} {src.LastName} {src.Specialization} {src.YearsOfWork}"));
 
-                cfg.CreateMap<InputModels.InputEmployeeModel, Entities.Employee>();
+                cfg.CreateMap<InputModels.EmployeeInputModel, Entities.Employee>();
             });
 
             //app.UseCors(builder =>

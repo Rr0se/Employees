@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.InputModels
 {
-    public class InputEmployeeModel
+    public class EmployeeInputModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

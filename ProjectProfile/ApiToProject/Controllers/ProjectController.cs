@@ -33,7 +33,6 @@ namespace ApiToProject.Controllers
                 Id = project.Id,      
                 Name = project.Title ,
                 ClientSector = project.ClientSector,
-                Technologies = project.Technologies,
                 StartDate = project.StartDate,
                 EndDate = project.EndDate
             };
@@ -65,6 +64,27 @@ namespace ApiToProject.Controllers
 
         }
 
+        private IList<ProfileTechnology> GenerateTechnologies(Guid Id)
+        {
+            var employee = context.Projects.Include(x => x.ProjectTechnology).ThenInclude(x => x.Technology).FirstOrDefault(x => x.Id == Id);
+            if (employee == null)
+                return null;
+            var technologies = employee.ProjectTechnology;
+            var output = new List<ProfileTechnology>();
+
+            foreach (var techno in technologies)
+            {
+                output.Add(new ProfileTechnology
+                {
+                    Id = techno.Technology.Id,
+                    Name = techno.Technology.TechnologyName,
+                    
+                });
+            }
+
+            return output;
+        }
+
         [Route("GetProject")]
         [HttpGet]
         public IActionResult GetProject(Guid Id)
@@ -91,7 +111,6 @@ namespace ApiToProject.Controllers
                     Id = proj.Id,
                     Name = proj.Title,
                     ClientSector = proj.ClientSector,
-                    Technologies = proj.Technologies,
                     StartDate = proj.StartDate,
                     EndDate = proj.EndDate,
                     ProfileProject = GenerateProject(proj.Id),
@@ -128,7 +147,6 @@ namespace ApiToProject.Controllers
 
             project.Title = inputProjectModel.Name;
             project.ClientSector = inputProjectModel.ClientSector;
-            project.Technologies = inputProjectModel.Technologies;
             project.StartDate = inputProjectModel.StartDate;
             project.EndDate = inputProjectModel.EndDate;
 
@@ -182,6 +200,41 @@ namespace ApiToProject.Controllers
             await context.SaveChangesAsync();
             return StatusCode((int)HttpStatusCode.OK);
             
+        }
+        [HttpPost]
+        [Route("AddTechnologyToProject")]
+        public async Task<IActionResult> AddTechnologyToProject([FromBody] ProjectTechnologyInputModel model)
+        {
+            var project = context.Projects.Include(x => x.ProjectTechnology).FirstOrDefault(x => x.Id == model.ProjectId);
+            if (project == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            var techno = context.Technologies.Include(x => x.ProjectTechnology).FirstOrDefault(x => x.Id == model.TechnologyId);
+            if (techno == null)
+                return StatusCode((int)HttpStatusCode.NotFound);
+
+            if (project.ProjectTechnology == null)
+                project.ProjectTechnology = new List<ProjectTechnology>();
+            if (techno.ProjectTechnology == null)
+                techno.ProjectTechnology = new List<ProjectTechnology>();
+
+            if (project.EmployeeProjects.Any(x => x.EmployeeId == techno.Id))
+                return StatusCode((int)HttpStatusCode.BadRequest);
+
+            var projectTechno = new ProjectTechnology
+            {
+                Project = project,
+                ProjectId = model.ProjectId,
+                Technology = techno,
+                TechnologyId = model.TechnologyId,
+                TechnologiesName = model.TechnologiesName
+
+            };
+            techno.ProjectTechnology.Add(projectTechno);
+            project.ProjectTechnology.Add(projectTechno);
+            await context.SaveChangesAsync();
+            return StatusCode((int)HttpStatusCode.OK);
+
         }
 
 

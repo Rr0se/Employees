@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Controllers
 {
+    [Route("api/technologies")]
+
     public class TechnologyController : Controller
     {
         private readonly DataBaseContext context;

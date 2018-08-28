@@ -26,9 +26,9 @@ namespace ApiToProject.Entities
 
                     var projects = new List<Project>()
                 {
-                    new Project(){Title="Linora-Application for managing animal transport" , ClientSector="Transport animal", Technologies=".Net/C#, MVC 5, MS SQL", StartDate=new DateTime(2017,11,21), EndDate=new DateTime(2017,12,14)},
-                    new Project(){Title="Be-there- Appliacation for managing events and ticket brokering" , ClientSector="Services", Technologies=".Net/C#, ASP.NET Core, AngularJS 2,TypeScript,Web API", StartDate=new DateTime(2018,01,10), EndDate=new DateTime(2018,02,04)},
-                    new Project(){Title="Ecologistics" , ClientSector="Spedition", Technologies=".Net/C#, MS SQL, MVC 5", StartDate=new DateTime(2018,02,10), EndDate=new DateTime(2018,03,15)}
+                    new Project(){Title="Linora-Application for managing animal transport" , ClientSector="Transport animal", StartDate=new DateTime(2017,11,21), EndDate=new DateTime(2017,12,14)},
+                    new Project(){Title="Be-there- Appliacation for managing events and ticket brokering" , ClientSector="Services", StartDate=new DateTime(2018,01,10), EndDate=new DateTime(2018,02,04)},
+                    new Project(){Title="Ecologistics" , ClientSector="Spedition", StartDate=new DateTime(2018,02,10), EndDate=new DateTime(2018,03,15)}
                 };
 
                 var languages = new List<Language>()

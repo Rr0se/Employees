@@ -163,7 +163,7 @@ namespace ApiToProject.Controllers
 
         [HttpPost]
         [Route("AddEmployee")]
-        public IActionResult AddEmployee([FromBody] InputEmployeeModel employeeInputModel)
+        public IActionResult AddEmployee([FromBody] EmployeeInputModel employeeInputModel)
         {
             var employee = new Employee()
             {
@@ -181,7 +181,7 @@ namespace ApiToProject.Controllers
 
         [HttpPut]
         [Route("EditEmployee")]
-        public IActionResult EditEmployee(InputEmployeeModel inputEmployeeModel)
+        public IActionResult EditEmployee(EmployeeInputModel inputEmployeeModel)
         {
             if (inputEmployeeModel == null)
                 return new StatusCodeResult((int)HttpStatusCode.BadRequest);

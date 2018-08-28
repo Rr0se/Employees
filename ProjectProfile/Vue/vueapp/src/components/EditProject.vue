@@ -51,9 +51,25 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            
-          </tbody>
+        </table>
+      </div>
+
+      <div class="form-group" >
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Technologie</th>
+              <th>
+              <div class="text-left m-t-sm m-b-md">
+                <select v-model="selectedtechnologies" style="float:left;width: 160px">
+                  <option v-for="techno in technologies" :key="techno.Id">
+                    {{techno.technologyName}}
+                  </option>
+                </select>
+              </div>
+              </th>
+            </tr>
+          </thead>
         </table>
       </div>
 
@@ -76,8 +92,10 @@ export default {
   data() {
     return {
       employees: [],
+      technologies: [],
       errors: [],
       selectedemployee: [],
+      selectedtechnologies: [],
       alert: ""
     };
   },
@@ -87,6 +105,15 @@ export default {
       .get("http://localhost:4444/api/employees/GetEmployees")
       .then(response => {
         this.employees = response.data;
+      })
+      .catch(e => {
+        this.errors.push(e);
+      });
+
+    axios
+      .get("http://localhost:4444/api/technologies/GetTechnologies")
+      .then(response => {
+        this.technologies = response.data;
       })
       .catch(e => {
         this.errors.push(e);

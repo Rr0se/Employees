@@ -11,7 +11,6 @@ namespace ApiToProject.InputModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string ClientSector { get; set; }
-        public string Technologies { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }
@@ -47,5 +46,16 @@ namespace ApiToProject.InputModels
         [Required(ErrorMessage = "Uzupełnij pole")]
         [Range(1, 5, ErrorMessage = "Oceń w skali od 1 do 5")]
         public int Profficiency { get; set; }
+    }
+
+    public class ProjectTechnologyInputModel
+    {
+        public Guid Id { get; set; }
+
+        public Guid ProjectId { get; set; }
+        public Guid TechnologyId { get; set; }
+        
+        public string TechnologiesName { get; set; }
+
     }
 }

@@ -16,10 +16,7 @@ namespace ApiToProject.Entities
         public string Title { get; set; }
         [Required(ErrorMessage = "Uzupełnij pole: ")]
         public string ClientSector { get; set; }
-
-        [Required(ErrorMessage = "Uzupełnij pole: ")]
-        public string Technologies { get; set; }
-
+        
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
