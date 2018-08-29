@@ -21,49 +21,6 @@ namespace ApiToProject.Controllers
             this.context = context;
         }
 
-        private Models.ProfileProject GenerateProject(Guid Id)
-        {
-            var project = context.Projects.FirstOrDefault(x => x.Id == Id);
-            if (project == null)
-            {
-                return null;
-            }
-            var output = new Models.ProfileProject
-            {              
-                Id = project.Id,      
-                Name = project.Title ,
-                ClientSector = project.ClientSector,
-                StartDate = project.StartDate,
-                EndDate = project.EndDate
-            };
-            return output;
-        }
-
-        private IList<Profile> GenerateProfile(Guid Id)
-        {
-            var employee = context.Projects.Include(z => z.EmployeeProjects).ThenInclude(z => z.Employee).FirstOrDefault(z => z.Id == Id);
-            if (employee == null)
-                return null;
-            var languages = employee.EmployeeProjects;
-            var output = new List<Profile>();
-
-            foreach (var e in languages)
-            {
-                output.Add(new Profile
-                {
-                    Id = e.Employee.Id,
-                    Name = e.Employee.FirstName,
-                    LastName = e.Employee.LastName,
-                    Specialization = e.Employee.Specialization,
-                    Rating = e.Employee.Rating,
-                    OverallTenure = e.Employee.YearsOfWork
-                });
-            }
-
-            return output;
-
-        }
-
         private IList<ProfileTechnology> GenerateTechnologies(Guid Id)
         {
             var employee = context.Projects.Include(x => x.ProjectTechnology).ThenInclude(x => x.Technology).FirstOrDefault(x => x.Id == Id);
@@ -89,10 +46,41 @@ namespace ApiToProject.Controllers
         [HttpGet]
         public IActionResult GetProject(Guid Id)
         {
+            var project = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).FirstOrDefault(x => x.Id == Id);
+
+            var emps = new List<ProjectProfileViewModel>();
+            foreach(var emp in project.EmployeeProjects)
+            {
+                emps.Add(new ProjectProfileViewModel
+                {
+                    Id = emp.EmployeeId,
+                    Name = emp.Employee.FirstName,
+                    Surname = emp.Employee.LastName
+                });
+            }
+            var projects = context.Projects.Include(x => x.ProjectTechnology).ThenInclude(z => z.Technology).FirstOrDefault(x => x.Id == Id);
+
+            var techno = new List<ProjectTechnologyViewModel>();
+            foreach (var tech in project.ProjectTechnology)
+            {
+                techno.Add(new ProjectTechnologyViewModel
+                {
+                    Id = tech.TechnologyId,
+                    Name = tech.Technology.TechnologyName,
+                });
+            }
             var output = new ProjectViewModel
             {
-                ProfileProject = GenerateProject(Id),
-                Profiles = GenerateProfile(Id)
+                Id = project.Id,
+                Name = project.Name,
+                Title = project.Title,
+                Description = project.Description,
+                ClientSector = project.ClientSector,
+                StartDate =project.StartDate,
+                EndDate = project.EndDate,
+                Profiles = emps,
+                Technology = techno
+                
             };
             return StatusCode((int)HttpStatusCode.OK, output);
         }
@@ -101,20 +89,33 @@ namespace ApiToProject.Controllers
         [HttpGet]
         public IActionResult GetProjects()
         {
-            var tmp=context.Projects.ToList();
+            var projects = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).Include(z => z.ProjectTechnology).ThenInclude(z=> z.Technology).ToList();
 
             var output = new List<ProjectViewModel>();
-                 foreach(var proj in tmp)
+           
+            foreach(var proj in projects)
             {
+                var technologies = new List<ProjectTechnologyViewModel>();
+
+                foreach (var tech in proj.ProjectTechnology)
+                {
+                    technologies.Add(new ProjectTechnologyViewModel
+                    {
+                        Id = tech.TechnologyId,
+                        Name = tech.Technology.TechnologyName
+                    });
+                }
                 output.Add(new ProjectViewModel
                 {
                     Id = proj.Id,
-                    Name = proj.Title,
+                    Name = proj.Name,
+                    Title = proj.Title,
+                    Description = proj.Description,
                     ClientSector = proj.ClientSector,
                     StartDate = proj.StartDate,
                     EndDate = proj.EndDate,
-                    ProfileProject = GenerateProject(proj.Id),
-                    Profiles = GenerateProfile(proj.Id)
+                    IsArchive = proj.IsArchive,
+                    Technology = technologies
                 });
             }
 
@@ -160,7 +161,8 @@ namespace ApiToProject.Controllers
         public IActionResult DeleteProject(Guid Id)
         {
             Project project = context.Projects.Find(Id);
-            context.Projects.Remove(project);
+            //context.Projects.Remove(project);
+            project.IsArchive = true;
 
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);
@@ -227,7 +229,6 @@ namespace ApiToProject.Controllers
                 ProjectId = model.ProjectId,
                 Technology = techno,
                 TechnologyId = model.TechnologyId,
-                TechnologiesName = model.TechnologiesName
 
             };
             techno.ProjectTechnology.Add(projectTechno);

@@ -1,38 +1,80 @@
 <template>
   <div class="projectclass">
-  <h1></h1>
+    <h1></h1>
 
 
-    <br/><br/><br/>
+    <br/>
+    <br/>
+    <br/>
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
-      <router-link to="/addproject"><button type="button" class="btn btn-primary btn-outline" 
-        style="float:left; margin-bottom:20px;">Dodaj projekt</button></router-link>
-          <table class="table table-hover">
-            <thead>
-                <tr>
-                    
-                    <th>Projekt</th>
-                    <!-- <th>Wykonawca</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <tr v-for="p in projects" :key="p.Id"  >
-                    <td align="left">{{p.profileProject.name}}</td>
-                    <!-- <td align="left">{{p.profileProject.profile.id}}</td> -->
-                    <td style="margin-left:5px;">
-                      <router-link to="projectinfoview"><button type="button" class="btn btn-primary btn-outline" style="float:right" >Informacje</button></router-link>
-                      <button type="button" class="btn btn-primary btn-outline" style="float:right">Usuń</button>
-                      <router-link to="/editproject"><button type="button" class="btn btn-primary btn-outline" style="float:right">Edytuj</button></router-link>
-                      
-                      
-                    </td>
-                </tr>
-            </tbody>
+      <router-link to="/addproject">
+        <button type="button" class="btn btn-primary btn-outline" style="float:left; margin-bottom:20px;">Dodaj projekt</button>
+      </router-link>
+
+      <div v-for="p in projects" :key="p.Id">
+        <table class="table table-hover" border="1">
+          <tr class="table-tittle">
+            <td align="left" class="text-color">
+              <h4> {{p.name}}</h4>
+              <h4>{{p.title}}</h4>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td align="left">
+              Sector:
+
+            </td>
+            <td align="right">
+              {{p.clientSector}}
+
+            </td>
+          </tr>
+          <tr>
+            <td align="left">
+              Technologie:
+
+            </td>
+            <td align="right">
+              <template v-for="t in p.technology">
+                {{t.name}}
+              </template>
+
+            </td>
+          </tr>
+          <tr>
+            <td align="left">
+              Start:
+
+            </td>
+            <td align="right">
+              {{p.startDate}}
+
+            </td>
+          </tr>
+          <tr>
+            <td align="left">
+              Koniec:
+
+            </td>
+            <td align="right">
+              {{p.endDate}}
+            </td>
+          </tr>
         </table>
+
+        <td style="margin-left:5px;">
+
+          <button type="button" class="btn btn-primary btn-outline" style="float:right" v-on:click="infoProject(p.id)"> Informacje </button>
+          <button type="button" class="btn btn-primary btn-outline" style="float:right">Usuń</button>
+          <router-link to="/editproject">
+            <button type="button" class="btn btn-primary btn-outline" style="float:right">Edytuj</button>
+          </router-link>
+        </td>
+      </div>
+      <div class="col-lg-4"></div>
     </div>
-    <div class="col-lg-4"></div>
   </div>
 </template>
 
@@ -41,12 +83,12 @@
 // Access-Control-Allow-Origin: *
 
 import axios from "axios";
+import router from "../router";
 
 export default {
   data() {
     return {
       projects: [],
-      project: {},
       errors: []
     };
   },
@@ -63,16 +105,14 @@ export default {
       .catch(e => {
         this.errors.push(e);
       });
+  },
+  methods: {
+    infoProject(id) {
+      router.push({
+        path: `/infoProject?id=` + id
+      });
+    }
   }
-
-  // methods:{
-  //   getID(){
-  //       axios.get('http://localhost:4444/api/projects/GetProject?id=86904cf4-0a67-487c-3f3c-08d5fc3f39c7')
-  //       .then(response =>{
-  //         this.projects=response.data;
-  //       })
-  //   }
-  // }
 };
 </script>
 
@@ -82,15 +122,30 @@ h1,
 h2 {
   font-weight: normal;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
+}
+
+.table-tittle {
+  background: #f64a35;
+}
+
+.text-color {
+  color: white;
+}
+.table-hover {
+  border-color: lightgrey;
+  border: lightgrey;
 }
 </style>

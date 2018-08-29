@@ -11,8 +11,8 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20180827134813_technology")]
-    partial class technology
+    [Migration("20180829114644_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,12 +131,16 @@ namespace ApiToProject.Migrations
                     b.Property<string>("ClientSector")
                         .IsRequired();
 
+                    b.Property<string>("Description");
+
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<DateTime>("StartDate");
+                    b.Property<bool>("IsArchive");
 
-                    b.Property<string>("Technologies")
+                    b.Property<string>("Name")
                         .IsRequired();
+
+                    b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -152,8 +156,6 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ProjectId");
-
-                    b.Property<string>("TechnologiesName");
 
                     b.Property<Guid>("TechnologyId");
 

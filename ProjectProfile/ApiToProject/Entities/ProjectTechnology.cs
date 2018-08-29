@@ -15,8 +15,6 @@ namespace ApiToProject.Entities
         public Project Project { get; set; }
         public Technology Technology { get; set; }
 
-        public string TechnologiesName { get; set; }
-
 
 
     }

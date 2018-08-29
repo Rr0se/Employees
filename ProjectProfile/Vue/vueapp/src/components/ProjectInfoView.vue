@@ -52,11 +52,7 @@
               <td align="left">{{p.profileProject.technologies}}</td>
               <td align="left">{{p.profileProject.startDate}}</td>
               <td align="left">{{p.profileProject.endDate}}</td>
-              <!-- <td style="margin-left:5px;">
-                      <router-link to="/editproject"><button class="btn btn-primary">Edytuj</button></router-link>
-                      <button class="btn btn-danger">Usuń</button>
-                      <router-link to="projectinfoview"><button class="btn btn-info">Informacje</button></router-link>
-                    </td> -->
+
             </tr>
         </tbody>
       </table>
@@ -81,8 +77,9 @@ export default {
 
   // Fetches posts when the component is created.
   created() {
+    var id = this.getUrlParameter("id");
     axios
-      .get(`http://localhost:4444/api/projects/GetProject?Id=`)
+      .get(`http://localhost:4444/api/projects/GetProject?id=` + id)
       .then(response => {
         console.log("asdaqwe");
         // JSON responses are automatically parsed.
@@ -97,16 +94,19 @@ export default {
       .then(response => {
         this.employees = response.data;
       });
+  },
+  methods: {
+    getUrlParameter(name) {
+      var results = new RegExp("[?&]" + name + "=([^&#]*)").exec(
+        window.location.href
+      );
+      if (results == null) {
+        return null;
+      } else {
+        return decodeURI(results[1]) || 0;
+      }
+    }
   }
-
-  //   methods:{
-  //   getID(){
-  //       axios.get('http://localhost:4444/api/projects/GetProject?id=86904cf4-0a67-487c-3f3c-08d5fc3f39c7')
-  //       .then(response =>{
-  //         this.projects=response.data;
-  //       })
-  //   }
-  // }
 };
 </script>
 

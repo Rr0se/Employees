@@ -10,14 +10,26 @@ namespace ApiToProject.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         public string ClientSector { get; set; }
-        public string Technologies { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IsArchive { get; set; }
 
-        public ProfileProject ProfileProject { get; set; }
+        public IList<ProjectProfileViewModel> Profiles { get; set; }
+        public IList<ProjectTechnologyViewModel> Technology { get; set; }
+    }
 
-        public IList<Profile> Profiles { get; set; }
-        public IList<ProfileTechnology> Technology { get; set; }
+    public class ProjectProfileViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
+
+    public class ProjectTechnologyViewModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

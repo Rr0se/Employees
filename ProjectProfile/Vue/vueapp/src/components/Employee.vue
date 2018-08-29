@@ -1,4 +1,3 @@
-
 <template>
   <div class="employeeclass container">
     <h1></h1>
@@ -13,11 +12,13 @@
         <button type="button" class="btn btn-primary btn-outline" style="float:left; margin-bottom:20px; ">Dodaj pracownika</button>
       </router-link>
 
-      <table class="table table-hover">
+      <table class="table table-hover" border="1">
         <thead>
-          <tr>
-            <th>Imie</th>
-            <th>Nazwisko</th>
+          <tr class="table-tittle">
+            <th class="text-color">Imie</th>
+            <th class="text-color">Nazwisko</th>
+            <th>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -29,9 +30,9 @@
                 <button type="button" class="btn btn-primary btn-outline" style="float:right">Edytuj</button>
               </router-link>
               <button type="submit" class="btn btn-primary btn-outline" style="float:right" v-on:click="deleteEmployee">Usuń</button>
-              
-                <button type="button" class="btn btn-primary btn-outline" style="float:right" v-on:click="cardEmployee(emp.profile.id)">Karta</button>
-              
+
+              <button type="button" class="btn btn-primary btn-outline" style="float:right" v-on:click="cardEmployee(emp.profile.id)">Karta</button>
+
 
             </td>
           </tr>
@@ -80,15 +81,6 @@ export default {
     },
 
     cardEmployee(id) {
-      // axios
-      //   .get("http://localhost:4444/api/employees/GetEdit")
-      //   .then(response => {
-      //     this.employees = response.data;
-      //   })
-      //   .catch(e => {
-      //     this.errors.push(e);
-      //   });
-
       router.push({
         path: `/card?id=` + id
       });
@@ -116,5 +108,17 @@ li {
 
 a {
   color: #42b983;
+}
+
+.table-tittle {
+  background: #f64a35;
+}
+
+.text-color {
+  color: white;
+}
+.table-hover {
+  border-color: lightgrey;
+  border: lightgrey;
 }
 </style>

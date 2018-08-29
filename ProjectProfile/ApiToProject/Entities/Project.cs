@@ -12,11 +12,19 @@ namespace ApiToProject.Entities
         [Key]
         public Guid Id { get; set; }
 
+        [Required(ErrorMessage = "Uzupełnij pole: ")]
+        public string Name { get; set; }
+
         [Required(ErrorMessage ="Uzupełnij pole: ")]
         public string Title { get; set; }
+
+        public bool IsArchive { get; set; }
+
         [Required(ErrorMessage = "Uzupełnij pole: ")]
         public string ClientSector { get; set; }
-        
+
+        public string Description { get; set; }
+
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 

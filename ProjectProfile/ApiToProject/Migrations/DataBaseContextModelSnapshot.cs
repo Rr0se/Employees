@@ -130,7 +130,14 @@ namespace ApiToProject.Migrations
                     b.Property<string>("ClientSector")
                         .IsRequired();
 
+                    b.Property<string>("Description");
+
                     b.Property<DateTime>("EndDate");
+
+                    b.Property<bool>("IsArchive");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<DateTime>("StartDate");
 
@@ -148,8 +155,6 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ProjectId");
-
-                    b.Property<string>("TechnologiesName");
 
                     b.Property<Guid>("TechnologyId");
 
