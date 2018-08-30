@@ -21,20 +21,20 @@
             </td>
             <td></td>
           </tr>
+
           <tr>
             <td align="left">
               Sector:
-
             </td>
             <td align="right">
               {{p.clientSector}}
 
             </td>
           </tr>
+
           <tr>
             <td align="left">
               Technologie:
-
             </td>
             <td align="right">
               <template v-for="t in p.technology">
@@ -43,39 +43,58 @@
 
             </td>
           </tr>
+
           <tr>
             <td align="left">
               Start:
-
             </td>
             <td align="right">
               {{p.startDate}}
 
             </td>
           </tr>
+
           <tr>
             <td align="left">
               Koniec:
-
             </td>
             <td align="right">
               {{p.endDate}}
             </td>
           </tr>
+
+
+          <div v-for="emp in p.profiles" :key="emp.Id">
+            <table class="table table-hover" border="1">
+              <tr>
+                <td align="left">
+                  Pracownicy:
+                </td>
+
+                <td align="right">
+                  {{emp.name}} {{emp.lastName}}
+                </td>
+              </tr>
+            </table>
+          </div>
         </table>
 
-        <td style="margin-left:5px;">
 
-          <button type="button" class="btn btn-primary btn-outline" style="float:right" v-on:click="infoProject(p.id)"> Informacje </button>
+
+        <td style="margin-left:5px;">
           <button type="button" class="btn btn-primary btn-outline" style="float:right">Usuń</button>
           <router-link to="/editproject">
             <button type="button" class="btn btn-primary btn-outline" style="float:right">Edytuj</button>
           </router-link>
         </td>
       </div>
-      <div class="col-lg-4"></div>
     </div>
+
+    <div class="col-lg-4"></div>
+
   </div>
+
+
 </template>
 
 <script>
@@ -105,13 +124,6 @@ export default {
       .catch(e => {
         this.errors.push(e);
       });
-  },
-  methods: {
-    infoProject(id) {
-      router.push({
-        path: `/infoProject?id=` + id
-      });
-    }
   }
 };
 </script>
@@ -144,6 +156,7 @@ a {
 .text-color {
   color: white;
 }
+
 .table-hover {
   border-color: lightgrey;
   border: lightgrey;

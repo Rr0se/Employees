@@ -21,6 +21,27 @@ namespace ApiToProject.Controllers
             this.context = context;
         }
 
+        private IList<Profile> GenerateProfile(Guid Id)
+        {
+            var employee = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(x => x.Employee).FirstOrDefault(x => x.Id == Id);
+            if (employee == null)
+                return null;
+            var employees = employee.EmployeeProjects;
+            var output = new List<Profile>();
+            foreach (var emps in employees)
+            {
+                output.Add(new Profile
+                {
+                    Id = emps.Employee.Id,
+                    Name = emps.Employee.FirstName,
+                    LastName = emps.Employee.LastName,
+
+                });
+            }
+            return output;
+        }
+
+
         private IList<ProfileTechnology> GenerateTechnologies(Guid Id)
         {
             var employee = context.Projects.Include(x => x.ProjectTechnology).ThenInclude(x => x.Technology).FirstOrDefault(x => x.Id == Id);
@@ -48,14 +69,14 @@ namespace ApiToProject.Controllers
         {
             var project = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).FirstOrDefault(x => x.Id == Id);
 
-            var emps = new List<ProjectProfileViewModel>();
+            var emps = new List<EmployeeViewModel>();
             foreach(var emp in project.EmployeeProjects)
             {
-                emps.Add(new ProjectProfileViewModel
+                emps.Add(new EmployeeViewModel
                 {
-                    Id = emp.EmployeeId,
+                    Id = emp.Employee.Id,
                     Name = emp.Employee.FirstName,
-                    Surname = emp.Employee.LastName
+                    LastName = emp.Employee.LastName
                 });
             }
             var projects = context.Projects.Include(x => x.ProjectTechnology).ThenInclude(z => z.Technology).FirstOrDefault(x => x.Id == Id);
@@ -89,13 +110,26 @@ namespace ApiToProject.Controllers
         [HttpGet]
         public IActionResult GetProjects()
         {
-            var projects = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).Include(z => z.ProjectTechnology).ThenInclude(z=> z.Technology).ToList();
-
+            var project = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).Include(z => z.ProjectTechnology).ThenInclude(z=> z.Technology).ToList();
+            //var project = context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee).ToList();
             var output = new List<ProjectViewModel>();
            
-            foreach(var proj in projects)
+           
+            foreach(var proj in project)
             {
                 var technologies = new List<ProjectTechnologyViewModel>();
+                var employees = new List<EmployeeViewModel>();
+
+                foreach(var emps in proj.EmployeeProjects)
+                {
+                    employees.Add(new EmployeeViewModel
+                    {
+                        Id = emps.EmployeeId,
+                        Name = emps.Employee.FirstName,
+                        LastName = emps.Employee.LastName
+
+                    });
+                }
 
                 foreach (var tech in proj.ProjectTechnology)
                 {
@@ -105,6 +139,7 @@ namespace ApiToProject.Controllers
                         Name = tech.Technology.TechnologyName
                     });
                 }
+
                 output.Add(new ProjectViewModel
                 {
                     Id = proj.Id,
@@ -115,7 +150,8 @@ namespace ApiToProject.Controllers
                     StartDate = proj.StartDate,
                     EndDate = proj.EndDate,
                     IsArchive = proj.IsArchive,
-                    Technology = technologies
+                    Technology = technologies,
+                    Profiles = employees
                 });
             }
 

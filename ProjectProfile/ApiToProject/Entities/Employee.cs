@@ -31,11 +31,5 @@ namespace ApiToProject.Entities
         public ICollection<EmployeeLanguage> EmployeeLanguages { get; set; }
         public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
 
-        //public ICollection<Skill> Skills { get; set; }
-        //= new List<Skill>();
-
-        //public ICollection<Language> Languages { get; set; }
-        //= new List<Language>();
-
     }
 }

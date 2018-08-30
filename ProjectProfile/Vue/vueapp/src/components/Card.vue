@@ -1,32 +1,64 @@
 <template>
   <div class="cardclass">
-    <h2></h2>
-    <br/>
-    <br/>
-    <br/>
-
-    <div class="employee">
-      <table class="table table-hover" >
-        <thead>
-          <h1>
-            <p>{{employee.profile.name}}</p>
-          </h1>
-          <h2>
-            <p> {{employee.profile.specialization}}</p>
-          </h2>
-          <h5>
-            <p>Rating: {{employee.profile.rating}} </p>
-          </h5>
-          <h5>
-            <p>Overall Tenure: {{employee.profile.overallTenure}}</p>
-          </h5>
-        </thead>
-      </table>
-    </div>
-
-
     <div class="col-lg-4"></div>
     <div class="col-lg-4">
+      <h2></h2>
+      <br/>
+      <br/>
+      <br/>
+
+      <div class="employee">
+        <table class="table table-hover">
+          <thead>
+            <h1>
+              <table>
+                <thead>
+                  <tr>
+
+                    <td>
+                      <!--<div class="img" style="vertical-aligin:top">-->
+                      <img src="../assets/profile.jpg" style="widht:114px; height:95px">
+                    </td>
+                    <td text-name>
+                      <!--<div class="text-n" style="vertical- aligin:bottom">-->
+                      <b>
+                        <p>{{employee.profile.name}}</p>
+                      </b>
+                    </td>
+                  </tr>
+                </thead>
+              </table>
+            </h1>
+            <h2>
+              <td>
+                <b>
+                  <p> {{employee.profile.specialization}}</p>
+                </b>
+              </td>
+            </h2>
+            <h5>
+              <td class="table-level">{{employee.profile.rating}}
+                <table class="table table-hover" border="1">
+                  <td v-for="numb in 5" class="box-level">
+                    <div v-if="numb <= employee.profile.rating" class="level">
+                    </div>
+                  </td>
+                  <p style="color:gray">Rating:{{employee.profile.rating}} / 5</p>
+                </table>
+              </td>
+            </h5>
+
+            <h5>
+              <td>
+                <p style="color:gray">Overall Tenure:{{employee.profile.overallTenure}}year</p>
+              </td>
+            </h5>
+          </thead>
+        </table>
+      </div>
+
+
+
 
 
       <table class="table table-hover" border="1">
@@ -41,9 +73,56 @@
           <tr v-for="skill in employee.skills" :key="skill.Id">
             <td>{{skill.name}}</td>
             <td>{{skill.experience}}</td>
-            <td>{{skill.profficiency}}</td>
+
+            <td class="table-level">{{skill.profficiency}}
+              <table class="table table-hover" border="1">
+
+                <td v-for="numb in 5" class="box-level">
+                  <div v-if="numb <= skill.profficiency" class="level">
+                  </div>
+                </td>
+              </table>
+            </td>
+
           </tr>
         </tbody>
+      </table>
+
+      <table>
+        <thead>
+          <tr>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+            </table>
+            <td>Junior</td>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Middle</td>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Proficient</td>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Senior</td>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Expert</td>
+          </tr>
+        </thead>
       </table>
 
       <div v-for="p in employee.projects" :key="p.Id">
@@ -110,14 +189,64 @@
           </tr>
         </thead>
         <tbody>
+
           <tr v-for="lang in employee.languages" :key="lang.Id">
             <td align="left">{{lang.name}}</td>
-            <td align="left">{{lang.speaking}}</td>
-            <td align="left">{{lang.writing}}</td>
-            <td align="left">{{lang.reading}}</td>
+
+            <td class="table-level" align="left">{{lang.speaking}}
+              <table class="table table-hover" border="1">
+                <td v-for="numb in 3" class="box-level">
+                  <div v-if="numb <= lang.speaking" class="level">
+                  </div>
+                </td>
+              </table>
+            </td>
+
+            <td class="table-level" align="left">{{lang.writing}}
+              <table class="table table-hover" border="1">
+                <td v-for="numb in 3" class="box-level">
+                  <div v-if="numb <= lang.speaking" class="level">
+                  </div>
+                </td>
+              </table>
+            </td>
+
+            <td class="table-level" align="left">{{lang.reading}}
+              <table class="table table-hover" border="1">
+                <td v-for="numb in 3" class="box-level">
+                  <div v-if="numb <= lang.speaking" class="level">
+                  </div>
+                </td>
+              </table>
+            </td>
           </tr>
         </tbody>
       </table>
+
+      <table>
+        <thead>
+          <tr>
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+            </table>
+            <td>Basic</td>
+
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Good</td>
+
+            <table class="table table-hover" border="1">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+            <td>Fluent</td>
+          </tr>
+        </thead>
+      </table>
+
 
       <div class="col-lg-4"></div>
     </div>
@@ -195,8 +324,32 @@ a {
 .text-color {
   color: white;
 }
+
 .table-hover {
   border-color: lightgrey;
   border: lightgrey;
+}
+
+.level {
+  color: gray;
+  background: #f64a35;
+  width: 100%;
+  height: 100%;
+}
+
+.box-level {
+  width: 20px;
+  height: 20px;
+}
+
+.box {
+  width: 20px;
+  height: 10px;
+  background: #f64a35;
+}
+
+.text-name {
+  position: relative;
+  bottom: 0;
 }
 </style>

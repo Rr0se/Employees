@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiToProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,9 @@ namespace ApiToProject.Models
         public string Specialization { get; set; }
         public int Rating { get; set; }
         public int OverallTenure { get; set; }
+
+        public Project Project { get; set; }
+        public Employee Emoloyee { get; set; }
+
     }
 }

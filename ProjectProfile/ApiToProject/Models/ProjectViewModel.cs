@@ -16,16 +16,16 @@ namespace ApiToProject.Models
         public DateTime EndDate { get; set; }
         public bool IsArchive { get; set; }
 
-        public IList<ProjectProfileViewModel> Profiles { get; set; }
+        public IList<EmployeeViewModel> Profiles { get; set; }
         public IList<ProjectTechnologyViewModel> Technology { get; set; }
     }
 
-    public class ProjectProfileViewModel
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-    }
+  //  public class ProjectProfileViewModel
+  //  {
+   //     public Guid Id { get; set; }
+   //     public string Name { get; set; }
+   //     public string Surname { get; set; }
+   // }
 
     public class ProjectTechnologyViewModel
     {

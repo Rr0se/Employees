@@ -62,8 +62,8 @@ namespace ApiToProject.Controllers
                     Name = skill.Skill.SkillName,
                     Group = skill.Skill.SkillGroup,
 
-                    // Experience = skill.Skill.ExperienceInYears,
-                    // Profficiency = skill.Skill.Profficiency
+                    Experience = skill.ExperienceInYears,
+                    Profficiency = skill.Profficiency
                 });
             }
 
@@ -72,7 +72,7 @@ namespace ApiToProject.Controllers
 
         private IList<ProfileProject> GenerateProject(Guid Id)
         {
-            var employee = context.Employees.Include(z => z.EmployeeProjects).ThenInclude(z => z.Project).FirstOrDefault(z => z.Id == Id);
+            var employee = context.Employees.Include(z => z.EmployeeProjects).ThenInclude(z => z.Project).ThenInclude(x=>x.ProjectTechnology).ThenInclude(x=>x.Technology).FirstOrDefault(z => z.Id == Id);
             if (employee == null)
                 return null;
 
@@ -81,14 +81,24 @@ namespace ApiToProject.Controllers
 
             foreach(var project in projects)
             {
+                var tech = new List<ProfileTechnology>();
+                foreach(var t in project.Project.ProjectTechnology)
+                {
+                    tech.Add(new ProfileTechnology
+                    {
+                        Id = t.TechnologyId,
+                        Name = t.Technology.TechnologyName
+                    });
+                }
                 output.Add(new ProfileProject
                 {
                     Id=project.Project.Id,
-                    Name=project.Project.Title,
-                    //ClientSector=project.Project.ClientSector,
-                   //Technologies=project.Project.Technologies,
-                    ///StartDate=project.Project.StartDate,
-                    //EndDate=project.Project.EndDate
+                    Name=project.Project.Name,
+                    Title = project.Project.Title,
+                    ClientSector =project.Project.ClientSector,
+                    Technology=tech,
+                    StartDate=project.Project.StartDate,
+                    EndDate=project.Project.EndDate
                 });
             }
             return output;
