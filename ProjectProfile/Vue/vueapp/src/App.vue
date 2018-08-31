@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
- <nav class="kupa navbar navbar-inverse navbar-fixed-top " style="height:70px;">
+ <nav class="navbar navbar-inverse navbar-fixed-top " style="height:70px;">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle"

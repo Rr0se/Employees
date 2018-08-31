@@ -16,25 +16,23 @@
         <thead>
           <tr class="table-tittle">
             <th class="text-color">Imie</th>
-            <th class="text-color">Nazwisko</th>
-            <th>
-            </th>
+            <th class="text-color" colspan="3">Nazwisko</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="emp in employees" :key="emp.Id">
+           
             <td align="left">{{emp.profile.name}}</td>
             <td align="left">{{emp.profile.lastName}}</td>
+            
             <td>
               <router-link to="/editemployee">
                 <button type="button" class="btn btn-primary btn-outline" style="float:right">Edytuj</button>
               </router-link>
               <button type="submit" class="btn btn-primary btn-outline" style="float:right" v-on:click="deleteEmployee">Usuń</button>
-
               <button type="button" class="btn btn-primary btn-outline" style="float:right" v-on:click="cardEmployee(emp.profile.id)">Karta</button>
-
-
             </td>
+
           </tr>
         </tbody>
       </table>

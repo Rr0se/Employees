@@ -8,60 +8,63 @@
       <br/>
 
       <div class="employee">
-        <table class="table table-hover">
+
+        <table>
           <thead>
-            <h1>
-              <table>
-                <thead>
-                  <tr>
-
-                    <td>
-                      <!--<div class="img" style="vertical-aligin:top">-->
-                      <img src="../assets/profile.jpg" style="widht:114px; height:95px">
-                    </td>
-                    <td text-name>
-                      <!--<div class="text-n" style="vertical- aligin:bottom">-->
-                      <b>
-                        <p>{{employee.profile.name}}</p>
-                      </b>
-                    </td>
-                  </tr>
-                </thead>
-              </table>
-            </h1>
-            <h2>
+            <tr>
               <td>
-                <b>
-                  <p> {{employee.profile.specialization}}</p>
-                </b>
+                <!--<td class="img" style="vertical-aligin:top">-->
+                <img src="../assets/profile.jpg" style="widht:114px; height:95px">
               </td>
-            </h2>
-            <h5>
-              <td class="table-level">{{employee.profile.rating}}
-                <table class="table table-hover" border="1">
-                  <td v-for="numb in 5" class="box-level">
-                    <div v-if="numb <= employee.profile.rating" class="level">
-                    </div>
-                  </td>
-                  <p style="color:gray">Rating:{{employee.profile.rating}} / 5</p>
-                </table>
+              <td text-name style="padding-top: 70px">
+                <!--<div class="text-n" style="vertical- aligin:bottom">-->
+                <h1>
+                  <b>
+                    <p>{{employee.profile.name}}</p>
+                  </b>
+                </h1>
               </td>
-            </h5>
-
-            <h5>
-              <td>
-                <p style="color:gray">Overall Tenure:{{employee.profile.overallTenure}}year</p>
-              </td>
-            </h5>
+            </tr>
           </thead>
         </table>
+
+        <tr>
+          <td>
+            <h2>
+              <b>
+                <p> {{employee.profile.specialization}}</p>
+              </b>
+            </h2>
+          </td>
+        </tr>
+
+
+        <table class="table-level">
+          <table class="table table-hover" border="1">
+            <td v-for="numb in 5" class="box-level">
+              <div v-if="numb <= employee.profile.rating" class="level">
+              </div>
+            </td>
+            <h5>
+              <p style="color:gray">Rating:{{employee.profile.rating}} / 5</p>
+            </h5>
+          </table>
+        </table>
+
+        <tr>
+          <td>
+            <h5>
+              <p style="color:gray">Overall Tenure:{{employee.profile.overallTenure}}year</p>
+            </h5>
+          </td>
+        </tr>
+
+
       </div>
 
 
 
-
-
-      <table class="table table-hover" border="1">
+      <table class="table table-hover" border="1" width="150px">
         <thead>
           <tr class="table-tittle">
             <th class="text-color">Umiejętności</th>
@@ -74,8 +77,8 @@
             <td>{{skill.name}}</td>
             <td>{{skill.experience}}</td>
 
-            <td class="table-level">{{skill.profficiency}}
-              <table class="table table-hover" border="1">
+            <td class="table-level">
+              <table class="table table-hover" border="1" style="margin-bottom: 0px">
 
                 <td v-for="numb in 5" class="box-level">
                   <div v-if="numb <= skill.profficiency" class="level">
@@ -88,58 +91,72 @@
         </tbody>
       </table>
 
-      <table>
-        <thead>
-          <tr>
-            <table class="table table-hover" border="1">
+
+      <table class="table table-hover">
+        <tr>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
               <td class="box"></td>
             </table>
-            <td>Junior</td>
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
-              <td class="box"></td>
-            </table>
-            <td>Middle</td>
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
-              <td class="box"></td>
-              <td class="box"></td>
-            </table>
-            <td>Proficient</td>
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
-              <td class="box"></td>
+          </td>
+          <td>Junior</td>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
               <td class="box"></td>
               <td class="box"></td>
             </table>
-            <td>Senior</td>
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
-              <td class="box"></td>
+          </td>
+          <td>Middle</td>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
               <td class="box"></td>
               <td class="box"></td>
               <td class="box"></td>
             </table>
-            <td>Expert</td>
-          </tr>
-        </thead>
+          </td>
+          <td>Proficient</td>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+          </td>
+          <td>Senior</td>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+          </td>
+          <td>Expert</td>
+        </tr>
       </table>
 
       <div v-for="p in employee.projects" :key="p.Id">
         <table class="table table-hover" border="1">
           <tr class="table-tittle">
-            <td align="left" class="text-color">
+            <td align="left" class="text-color" colspan="2">
               <h4> {{p.name}}</h4>
               <h4>{{p.title}}</h4>
             </td>
-            <td></td>
+
           </tr>
           <tr>
             <td align="left">
               Sector:
 
             </td>
-            <td align="right">
+            <td align="left">
               {{p.clientSector}}
 
             </td>
@@ -149,7 +166,7 @@
               Technologie:
 
             </td>
-            <td align="right">
+            <td align="left">
               <template v-for="t in p.technology">
                 {{t.name}}
               </template>
@@ -161,7 +178,7 @@
               Start:
 
             </td>
-            <td align="right">
+            <td align="left">
               {{p.startDate}}
 
             </td>
@@ -171,7 +188,7 @@
               Koniec:
 
             </td>
-            <td align="right">
+            <td align="left">
               {{p.endDate}}
             </td>
           </tr>
@@ -193,8 +210,8 @@
           <tr v-for="lang in employee.languages" :key="lang.Id">
             <td align="left">{{lang.name}}</td>
 
-            <td class="table-level" align="left">{{lang.speaking}}
-              <table class="table table-hover" border="1">
+            <td class="table-level" align="left">
+              <table class="table table-hover" border="1" style="margin-bottom: 0px">
                 <td v-for="numb in 3" class="box-level">
                   <div v-if="numb <= lang.speaking" class="level">
                   </div>
@@ -202,19 +219,19 @@
               </table>
             </td>
 
-            <td class="table-level" align="left">{{lang.writing}}
-              <table class="table table-hover" border="1">
+            <td class="table-level" align="left">
+              <table class="table table-hover" border="1" style="margin-bottom: 0px">
                 <td v-for="numb in 3" class="box-level">
-                  <div v-if="numb <= lang.speaking" class="level">
+                  <div v-if="numb <= lang.writing" class="level">
                   </div>
                 </td>
               </table>
             </td>
 
-            <td class="table-level" align="left">{{lang.reading}}
-              <table class="table table-hover" border="1">
+            <td class="table-level" align="left">
+              <table class="table table-hover" border="1" style="margin-bottom: 0px">
                 <td v-for="numb in 3" class="box-level">
-                  <div v-if="numb <= lang.speaking" class="level">
+                  <div v-if="numb <= lang.reading" class="level">
                   </div>
                 </td>
               </table>
@@ -223,35 +240,40 @@
         </tbody>
       </table>
 
-      <table>
-        <thead>
-          <tr>
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
-            </table>
-            <td>Basic</td>
+      <table class="table table-hover">
+        <tr>
 
-            <table class="table table-hover" border="1">
-              <td class="box"></td>
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
               <td class="box"></td>
             </table>
-            <td>Good</td>
+          </td>
+          <td>Basic</td>
 
-            <table class="table table-hover" border="1">
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
+              <td class="box"></td>
+              <td class="box"></td>
+            </table>
+          </td>
+          <td>Good</td>
+
+          <td>
+            <table class="table table-hover" border="1" style="margin-bottom:0;">
               <td class="box"></td>
               <td class="box"></td>
               <td class="box"></td>
             </table>
-            <td>Fluent</td>
-          </tr>
-        </thead>
+          </td>
+          <td>Fluent</td>
+        </tr>
       </table>
 
 
       <div class="col-lg-4"></div>
     </div>
   </div>
-
+  </div>
 </template>
 
 <script>
@@ -349,7 +371,6 @@ a {
 }
 
 .text-name {
-  position: relative;
-  bottom: 0;
+  padding-top: 70px;
 }
 </style>

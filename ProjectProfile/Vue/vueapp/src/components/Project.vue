@@ -13,20 +13,19 @@
       </router-link>
 
       <div v-for="p in projects" :key="p.Id">
-        <table class="table table-hover" border="1">
+        <table class="table table-hover" border="1" width="150px" height="200px">
           <tr class="table-tittle">
-            <td align="left" class="text-color">
+            <td align="left" class="text-color" colspan="2">
               <h4> {{p.name}}</h4>
               <h4>{{p.title}}</h4>
             </td>
-            <td></td>
           </tr>
 
           <tr>
             <td align="left">
               Sector:
             </td>
-            <td align="right">
+            <td align="left">
               {{p.clientSector}}
 
             </td>
@@ -36,7 +35,7 @@
             <td align="left">
               Technologie:
             </td>
-            <td align="right">
+            <td align="left">
               <template v-for="t in p.technology">
                 {{t.name}}
               </template>
@@ -48,7 +47,7 @@
             <td align="left">
               Start:
             </td>
-            <td align="right">
+            <td align="left">
               {{p.startDate}}
 
             </td>
@@ -58,26 +57,23 @@
             <td align="left">
               Koniec:
             </td>
-            <td align="right">
+            <td align="left">
               {{p.endDate}}
             </td>
           </tr>
 
 
-          <div v-for="emp in p.profiles" :key="emp.Id">
-            <table class="table table-hover" border="1">
-              <tr>
-                <td align="left">
-                  Pracownicy:
-                </td>
-
-                <td align="right">
-                  {{emp.name}} {{emp.lastName}}
-                </td>
-              </tr>
-            </table>
-          </div>
+          <tr v-for="emp in p.profiles" :key="emp.Id">
+            <!--table class="table table-hover" border="1">-->
+            <td align="left">
+              Pracownicy:
+            </td>
+            <td align="left">
+              {{emp.name}} {{emp.lastName}}
+            </td>
+          </tr>
         </table>
+
 
 
 
